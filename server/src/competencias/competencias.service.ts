@@ -9,7 +9,7 @@ import { UpdateCompetenciaDto } from './dto/update-competencia.dto';
 export class CompetenciasService {
   constructor(
     @InjectRepository(Competencia)
-    private competenciasRepository: Repository<Competencia>,
+    private readonly competenciasRepository: Repository<Competencia>,
   ) {}
 
   create(createCompetenciaDto: CreateCompetenciaDto): Promise<Competencia> {

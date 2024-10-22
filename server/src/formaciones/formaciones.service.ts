@@ -10,10 +10,10 @@ import { Competencia } from '../competencias/entidades/competencia.entity';
 export class FormacionesService {
   constructor(
     @InjectRepository(Formacion)
-    private formacionesRepository: Repository<Formacion>,
+    private readonly formacionesRepository: Repository<Formacion>,
 
     @InjectRepository(Competencia)
-    private competenciasRepository: Repository<Competencia>,
+    private readonly competenciasRepository: Repository<Competencia>,
   ) {}
 
   // Crear una formación con competencias asociadas por código

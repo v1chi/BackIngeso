@@ -8,5 +8,6 @@ import { Competencia } from './entidades/competencia.entity';
   imports: [TypeOrmModule.forFeature([Competencia])],
   controllers: [CompetenciasController],
   providers: [CompetenciasService],
+  exports: [TypeOrmModule], // Exporta TypeOrmModule para usarlo en otros módulos
 })
 export class CompetenciasModule {}
