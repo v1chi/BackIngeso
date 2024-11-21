@@ -31,6 +31,8 @@ export class CreateFormacionDto {
   @IsString()
   profesorRelator?: string;
 
+  @IsOptional()
   @IsArray()
-  competencias: number[]; // Array de IDs de competencias
+  @IsNumber({}, { each: true })
+  competencias: number[] = []; // Array de IDs de competencias
 }

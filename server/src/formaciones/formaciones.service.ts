@@ -16,23 +16,24 @@ export class FormacionesService {
     private readonly competenciasRepository: Repository<Competencia>,
   ) {}
 
-  // Crear una formación con competencias asociadas por código
+
   async create(createFormacionDto: CreateFormacionDto): Promise<Formacion> {
     const { competencias, ...data } = createFormacionDto;
-
+  
     // Buscar las competencias por sus códigos usando `In`
     const competenciasEncontradas = await this.competenciasRepository.find({
-      where: { codigo: In(competencias) },
+      where: { id: In(competencias)  },
     });
-
+  
     // Crear la formación con las competencias encontradas
     const formacion = this.formacionesRepository.create({
       ...data,
       competencias: competenciasEncontradas,
     });
-
+  
     return this.formacionesRepository.save(formacion);
   }
+  
 
   // Obtener todas las formaciones con sus competencias
   findAll(): Promise<Formacion[]> {
@@ -50,24 +51,30 @@ export class FormacionesService {
     return formacion;
   }
 
-  // Actualizar una formación y sus competencias por código
+
+
+    // Actualizar una formación y sus competencias por ID
   async update(id: number, updateFormacionDto: UpdateFormacionDto): Promise<Formacion> {
     const { competencias, ...data } = updateFormacionDto;
 
+    // Buscar la formación existente
     const formacion = await this.findOne(id);
 
-    // Si se envían nuevos códigos de competencias, actualizarlas
+    // Si se envían nuevos IDs de competencias, actualizarlas
     if (competencias) {
       const competenciasEncontradas = await this.competenciasRepository.find({
-        where: { codigo: In(competencias) },
+        where: { id: In(competencias) }, // Cambiar de 'codigo' a 'id'
       });
-      formacion.competencias = competenciasEncontradas;
+      formacion.competencias = competenciasEncontradas; // Asociar las competencias encontradas
     }
 
     // Actualizar los demás campos de la formación
     Object.assign(formacion, data);
+
+    // Guardar los cambios en la base de datos
     return this.formacionesRepository.save(formacion);
   }
+
 
   // Eliminar una formación por su ID
   async remove(id: number): Promise<void> {

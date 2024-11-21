@@ -29,7 +29,7 @@ import { EstudianteFormacion } from './estudiantes-formaciones/entidades/estudia
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '',
       database: 'test_ingeso',
       entities: [Formacion, Competencia, Estudiante, Usuario, EstudianteFormacion],
       synchronize: true,

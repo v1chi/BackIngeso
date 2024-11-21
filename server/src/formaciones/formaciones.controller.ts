@@ -9,6 +9,7 @@ export class FormacionesController {
 
   @Post()
   create(@Body() createFormacionDto: CreateFormacionDto) {
+    console.log('Datos recibidos:', createFormacionDto);
     return this.formacionesService.create(createFormacionDto);
   }
 
