@@ -37,17 +37,18 @@ export class Formacion {
   @Column({ nullable: true, default: null })
   estado: string; // abierta o cerrada
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, default: 0 })
   aprobados: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, default: 0 })
   reprobados: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, default: 0 })
   desercion: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, default: 0 })
   total: number;
+
 
   @ManyToMany(() => Competencia)
   @JoinTable()

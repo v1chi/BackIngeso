@@ -21,6 +21,10 @@ import { Competencia } from './competencias/entidades/competencia.entity';
 import { Estudiante } from './estudiantes/entidades/estudiante.entity';
 import { Usuario } from './usuarios/entidades/usuario.entity';
 import { EstudianteFormacion } from './estudiantes-formaciones/entidades/estudiante_formacion.entity';
+import { TalleresModule } from './talleres/talleres.module';
+import { AsistenciasModule } from './asistencias/asistencias.module';
+import { Taller } from './talleres/entities/taller.entity';
+import { Asistencia } from './asistencias/entities/asistencia.entity';
 
 @Module({
   imports: [
@@ -31,14 +35,16 @@ import { EstudianteFormacion } from './estudiantes-formaciones/entidades/estudia
       username: 'root',
       password: '',
       database: 'test_ingeso',
-      entities: [Formacion, Competencia, Estudiante, Usuario, EstudianteFormacion],
+      entities: [Formacion, Competencia, Estudiante, Usuario, EstudianteFormacion, Taller, Asistencia],
       synchronize: true,
     }),
     EstudiantesFormacionesModule,
     FormacionesModule,
     EstudiantesModule,
     CompetenciasModule,
-    UsuariosModule
+    UsuariosModule,
+    TalleresModule,
+    AsistenciasModule
   ],
   controllers: [FormacionesController, EstudiantesController, UsuariosController, CompetenciasController, EstudiantesFormacionesController],
   providers: [FormacionesService, EstudiantesService, UsuariosService, CompetenciasService, EstudiantesFormacionesService],
