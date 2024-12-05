@@ -17,8 +17,27 @@ export class UsuariosService {
     return this.usuariosRepository.save(usuario);
   }
 
+  async login(email: string, password: string): Promise<boolean> {
+    const usuario = await this.findOneByEmail(email);
+    if (!usuario) {
+        console.log('Usuario no encontrado.');
+        return false;
+    }
+    if (usuario.clave !== password) {
+        console.log('Contraseña incorrecta.');
+        return false;
+    }
+    return true;
+  }
+
   findAll(): Promise<Usuario[]> {
     return this.usuariosRepository.find();
+  }
+
+  async findOneByEmail(correo: string): Promise<Usuario> {
+    const usuario = await this.usuariosRepository.findOne({ where: { correo }});
+    if (!usuario) throw new NotFoundException('Usuario no encontrado');
+    return usuario;
   }
 
   async findOne(id: number): Promise<Usuario> {
