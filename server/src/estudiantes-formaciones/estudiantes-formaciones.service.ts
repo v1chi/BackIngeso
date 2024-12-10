@@ -40,6 +40,9 @@ export class EstudiantesFormacionesService {
       formacion,
       estado,
     });
+
+    formacion.total += 1;
+    await this.formacionesRepository.save(formacion);
   
     return this.estudiantesFormacionesRepository.save(nuevaRelacion);
   }
