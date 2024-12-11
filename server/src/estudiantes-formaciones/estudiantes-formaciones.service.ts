@@ -52,6 +52,13 @@ export class EstudiantesFormacionesService {
     return this.estudiantesFormacionesRepository.find();
   }
 
+  async findByFormacion(formacionId: number): Promise<EstudianteFormacion[]> {
+    return this.estudiantesFormacionesRepository.find({
+      where: { formacion: { id: formacionId } },
+      relations: ['formacion', 'estudiante'],
+    });
+  }
+
   async updateEstado(id: number, updateEstadoDto: UpdateEstadoDto): Promise<EstudianteFormacion> {
     const relacion = await this.estudiantesFormacionesRepository.findOne({
       where: { id },

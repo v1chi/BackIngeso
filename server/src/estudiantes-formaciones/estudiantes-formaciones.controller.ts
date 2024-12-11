@@ -19,10 +19,16 @@ export class EstudiantesFormacionesController {
     );
   }
 
-  // Endpoint para obtener todas las relaciones
+  // obtener todas las relaciones
   @Get()
   async findAll() {
     return this.estudiantesFormacionesService.findAll();
+  }
+
+  // obtener los participantes de una formación específica
+  @Get('formacion/:formacionId')
+  async findByFormacion(@Param('formacionId', ParseIntPipe) formacionId: number) {
+    return this.estudiantesFormacionesService.findByFormacion(formacionId);
   }
 
   @Patch(':id')
