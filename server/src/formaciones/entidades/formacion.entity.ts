@@ -6,7 +6,6 @@ export class Formacion {
   @PrimaryGeneratedColumn()
   id: number;
 
-
   @Column()
   nombre: string;
 
@@ -25,8 +24,6 @@ export class Formacion {
   @Column({ type: 'timestamp' })
   fechaTermino: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
-  fechaCeremonia: Date;
 
   @Column({ nullable: true })
   profesorRelator: string;

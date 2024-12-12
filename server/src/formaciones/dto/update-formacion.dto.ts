@@ -25,9 +25,6 @@ export class UpdateFormacionDto {
   @IsDate()
   fechaTermino?: Date;
 
-  @IsOptional()
-  @IsDate()
-  fechaCeremonia?: Date;
 
   @IsOptional()
   @IsString()

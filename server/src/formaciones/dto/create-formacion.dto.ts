@@ -23,9 +23,7 @@ export class CreateFormacionDto {
   @IsDate()
   fechaTermino: Date;
 
-  @IsOptional()
-  @IsDate()
-  fechaCeremonia?: Date;
+
 
   @IsOptional()
   @IsString()
