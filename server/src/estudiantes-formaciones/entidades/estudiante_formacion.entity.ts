@@ -17,8 +17,8 @@ export class EstudianteFormacion {
   formacion: Formacion;
 
   // Estado del estudiante en la formación
-  @Column({ type: 'enum', enum: ['en curso', 'aprobado', 'desertor'], default: 'en curso' })
-  estado: 'en curso' | 'aprobado' | 'desertor';
+  @Column({ type: 'enum', enum: ['en curso', 'aprobado', 'desertor', 'reprobado'], default: 'en curso' })
+  estado: 'en curso' | 'aprobado' | 'desertor' | 'reprobado';
 
   @Column({ type: 'int', nullable: true, default: 0 })
   talleresAprobados: number;

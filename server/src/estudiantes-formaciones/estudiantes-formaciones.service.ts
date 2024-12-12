@@ -22,7 +22,7 @@ export class EstudiantesFormacionesService {
   async asociarEstudianteAFormacion(
     estudianteId: number,
     formacionId: number,
-    estado: 'en curso' | 'aprobado' | 'desertor',
+    estado: 'en curso' | 'aprobado' | 'desertor' | 'reprobado',
   ): Promise<EstudianteFormacion> {
     const estudiante = await this.estudiantesRepository.findOneBy({ id: estudianteId });
     const formacion = await this.formacionesRepository.findOneBy({ id: formacionId });
@@ -77,22 +77,22 @@ export class EstudiantesFormacionesService {
         formacion.aprobados = Math.max((formacion.aprobados || 0) - 1, 0);
       } else if (relacion.estado === 'desertor') {
         formacion.desercion = Math.max((formacion.desercion || 0) - 1, 0);
-      } else if (relacion.estado === 'en curso') {
-        formacion.total = Math.max((formacion.total || 0) - 1, 0);
-      }
+      } else if (relacion.estado === 'reprobado') {
+        formacion.reprobados = Math.max((formacion.reprobados || 0) - 1, 0);
+      } 
   
       if (updateEstadoDto.estado === 'aprobado') {
         formacion.aprobados = (formacion.aprobados || 0) + 1;
       } else if (updateEstadoDto.estado === 'desertor') {
         formacion.desercion = (formacion.desercion || 0) + 1;
-      } else if (updateEstadoDto.estado === 'en curso') {
-        formacion.total = (formacion.total || 0) + 1;
+      } else if (updateEstadoDto.estado === 'reprobado') {
+        formacion.reprobados = (formacion.reprobados || 0) + 1;
       }
   
       // Validar que ningún contador sea negativo antes de guardar
       formacion.aprobados = Math.max(formacion.aprobados || 0, 0);
       formacion.desercion = Math.max(formacion.desercion || 0, 0);
-      formacion.total = Math.max(formacion.total || 0, 0);
+      formacion.reprobados = Math.max(formacion.reprobados || 0, 0);
   
       // Guarda los cambios en la formación
       await this.formacionesRepository.save(formacion);

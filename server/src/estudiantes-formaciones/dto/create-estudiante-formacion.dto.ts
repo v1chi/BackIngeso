@@ -7,8 +7,8 @@ export class CreateEstudianteFormacionDto {
   @IsNumber()
   formacionId: number;
 
-  @IsEnum(['en curso', 'aprobado', 'desertor'], {
-    message: 'Estado debe ser en curso, aprobado o desertor',
+  @IsEnum(['en curso', 'aprobado', 'desertor', 'reprobado'], {
+    message: 'Estado debe ser en curso, aprobado, reprobado o desertor',
   })
-  estado: 'en curso' | 'aprobado' | 'desertor';
+  estado: 'en curso' | 'aprobado' | 'desertor' | 'reprobado';
 }

@@ -19,9 +19,6 @@ export class Formacion {
   @Column()
   semestre: string; // I o II
 
-  @Column()
-  año: number;
-
   @Column({ type: 'timestamp' })
   fechaInicio: Date;
 
