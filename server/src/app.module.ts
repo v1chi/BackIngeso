@@ -1,6 +1,6 @@
-
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as dotenv from 'dotenv';
 import { FormacionesController } from './formaciones/formaciones.controller';
 import { EstudiantesController } from './estudiantes/estudiantes.controller';
 import { UsuariosController } from './usuarios/usuarios.controller';
@@ -26,17 +26,19 @@ import { AsistenciasModule } from './asistencias/asistencias.module';
 import { Taller } from './talleres/entities/taller.entity';
 import { Asistencia } from './asistencias/entities/asistencia.entity';
 
+dotenv.config();
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'test_ingeso',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT, 10) || 3306,
+      username: process.env.DB_USERNAME || 'root',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_NAME || 'test_ingeso',
       entities: [Formacion, Competencia, Estudiante, Usuario, EstudianteFormacion, Taller, Asistencia],
-      synchronize: true,
+      synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }),
     EstudiantesFormacionesModule,
     FormacionesModule,
@@ -44,9 +46,21 @@ import { Asistencia } from './asistencias/entities/asistencia.entity';
     CompetenciasModule,
     UsuariosModule,
     TalleresModule,
-    AsistenciasModule
+    AsistenciasModule,
   ],
-  controllers: [FormacionesController, EstudiantesController, UsuariosController, CompetenciasController, EstudiantesFormacionesController],
-  providers: [FormacionesService, EstudiantesService, UsuariosService, CompetenciasService, EstudiantesFormacionesService],
+  controllers: [
+    FormacionesController,
+    EstudiantesController,
+    UsuariosController,
+    CompetenciasController,
+    EstudiantesFormacionesController,
+  ],
+  providers: [
+    FormacionesService,
+    EstudiantesService,
+    UsuariosService,
+    CompetenciasService,
+    EstudiantesFormacionesService,
+  ],
 })
 export class AppModule {}
